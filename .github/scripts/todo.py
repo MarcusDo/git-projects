@@ -18,3 +18,37 @@ class Task:
     # Returns a user-friendly description for print() or str()
     def __str__(self):
         return f"Task: {self.title}, Status: {self.status}"
+
+
+class TaskPool:
+    def __init__(self):
+        self.tasks = []  # Initializes an empty list to store tasks
+
+    def populate(self):
+        # Create tasks with different initial statuses
+        task1 = Task("Add Login UI", status="Done")
+        task2 = Task("Fix UI Bug", status="Done")
+        task3 = Task("Write Tests", status="Done")
+        task4 = Task("Update Login UI", status="ToDo")
+        task5 = Task("Update Documentation", status="ToDo")
+        task6 = Task("Deploy to Production", status="ToDo")
+
+        # Mark the first three tasks as completed
+        task1.mark_completed()
+        task2.mark_completed()
+        task3.mark_completed()
+
+        # Assign all tasks to the pool
+        self.tasks = [task1, task2, task3, task4, task5, task6]
+
+    def add_task(self, task):
+        # Adds a Task object to the list
+        self.tasks.append(task)
+
+    def get_open_tasks(self):
+        # Returns only the tasks that are still "ToDo"
+        return [task for task in self.tasks if task.status == "ToDo"]
+
+    def get_done_tasks(self):
+        # Returns only the tasks that are marked "Done"
+        return [task for task in self.tasks if task.status == "Done"]
